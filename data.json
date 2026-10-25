@@ -3,20 +3,67 @@
   "updatedAt": "2026-10-25",
   "currency": "INR",
   "locale": "en-IN",
-  "isSampleData": true,
+  "isSampleData": false,
   "debts": [
-    { "lender": "Home loan", "monthsRemaining": 60, "emiAmount": 24500, "principalRemaining": 1250000 },
-    { "lender": "Car loan", "monthsRemaining": 20, "emiAmount": 15800, "principalRemaining": 285000 },
-    { "lender": "Personal loan", "monthsRemaining": 12, "emiAmount": 8000, "principalRemaining": 96000 }
+    {
+      "lender": "HDFC",
+      "monthsRemaining": 27,
+      "emiAmount": 64000,
+      "principalRemaining": 1511000
+    },
+    {
+      "lender": "Axis",
+      "monthsRemaining": 53,
+      "emiAmount": 17000,
+      "principalRemaining": 652000
+    },
+    {
+      "lender": "KreditBee",
+      "monthsRemaining": 34,
+      "emiAmount": 18000,
+      "principalRemaining": 457000
+    },
+    {
+      "lender": "Poonam",
+      "monthsRemaining": 34,
+      "emiAmount": 17000,
+      "principalRemaining": 421000
+    },
+    {
+      "lender": "Fibe",
+      "monthsRemaining": 22,
+      "emiAmount": 16000,
+      "principalRemaining": 280000
+    },
+    {
+      "lender": "Groww",
+      "monthsRemaining": 22,
+      "emiAmount": 13000,
+      "principalRemaining": 235000
+    }
   ],
   "investments": [
-    { "name": "Mutual funds", "currentCapital": 620000 },
-    { "name": "Provident fund", "currentCapital": 380000 },
-    { "name": "Fixed deposits", "currentCapital": 175000 }
+    {
+      "name": "Trading",
+      "currentCapital": 300000
+    },
+    {
+      "name": "Savings",
+      "currentCapital": 50000
+    }
   ],
   "plans": [
-    { "name": "Emergency fund", "amountNeeded": 300000 },
-    { "name": "Home renovation", "amountNeeded": 250000 },
-    { "name": "Travel fund", "amountNeeded": 150000 }
+    {
+      "name": "Home Deposit",
+      "amountNeeded": 150000
+    },
+    {
+      "name": "Home things",
+      "amountNeeded": 300000
+    },
+    {
+      "name": "Honeymoon",
+      "amountNeeded": 150000
+    }
   ]
 }
