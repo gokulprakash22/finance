@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Personal finance</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0c1016;--surface:#141a23;--surface2:#19212c;--ink:#e9edf4;--muted:#909cab;--line:#26303d;--blue:#c0e989;--radius:15px;--debt:#fa917e;--investment:#54d9b0;--plan:#b59af3;--emi:#edbc7f}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:radial-gradient(ellipse at 75% -10%,#18312655,transparent 40%),var(--bg);color:var(--ink);font:14px Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}button,input,select{font:inherit}button,a,select{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{opacity:.4;cursor:not-allowed}button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid #c0e989;outline-offset:4px}a{color:inherit;text-decoration:none}svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}h1,h2,h3,p{margin:0}button svg{width:16px;height:16px}[hidden]{display:none!important}.skip{position:fixed;left:10px;top:-100px;z-index:9;background:var(--surface2);padding:14px}.skip:focus{top:10px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    main{max-width:1440px;margin:0 auto;padding:26px 48px 24px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:23px;border-bottom:1px solid #ffffff0c}.workspace-label{display:flex;gap:10px;align-items:center;font-size:10px;letter-spacing:2px;color:#9ca89b;font-weight:600}.status-dot{width:6px;height:6px;border-radius:50%;background:#b4df82;box-shadow:0 0 12px #b4df8240}.actions{display:flex;gap:8px;align-items:center}.btn{border:1px solid #303a44;border-radius:8px;background:#171e26;color:#b6c0cb;padding:10px 14px;display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:11px;font-weight:550;min-height:37px;transition:background .18s,border-color .18s,transform .18s}.btn:hover:not(:disabled){background:#232e38;border-color:#4d5d6a;transform:translateY(-1px)}.btn-primary{background:#c0e989;border-color:#c0e989;color:#1b2b0f}.btn-primary:hover:not(:disabled){background:#d1f4a3;border-color:#d1f4a3}.hero{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:30px 0 27px}h1{font-size:43px;line-height:1.15;font-weight:650;letter-spacing:-1.6px}h1 span{color:#b9d993}.month-block{text-align:right}.month-chip{display:inline-flex;align-items:center;gap:8px;border:1px solid #334036;background:#18241d70;padding:10px 13px;border-radius:8px;font-size:12px;color:#c0ccb9}.month-chip svg{width:15px;height:15px;color:#9fb792}.updated{font-size:10px;color:#7d8c8a;margin-top:10px}
+    .notice{display:flex;align-items:center;gap:10px;padding:11px 14px;border:1px solid #51462b;border-radius:9px;background:#28231a;color:#c8b687;font-size:11px;line-height:1.6;margin-bottom:19px}.notice svg{width:16px;height:16px}.error{background:#32211f;border-color:#704336;color:#f0ac9a}.edited-notice{background:#192d26;border-color:#365747;color:#9bd1b8}.welcome{text-align:center;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);padding:48px 24px}.welcome h2{font-size:21px;margin-bottom:12px}.welcome p{color:var(--muted);max-width:530px;margin:0 auto 20px;line-height:1.8}.welcome .btn + .btn{margin-left:8px}.local-help{font-size:12px;color:var(--muted);line-height:1.9;margin-top:20px}.local-help code{background:#222b36;padding:3px 5px;border-radius:4px}.local-help a{color:var(--blue)}
+    .debt-tone{--accent:var(--debt);--tint:#fa917e0b;--edge:#fa917e33}.investment-tone{--accent:var(--investment);--tint:#54d9b00b;--edge:#54d9b033}.plan-tone{--accent:var(--plan);--tint:#b59af30c;--edge:#b59af333}.emi-tone{--accent:var(--emi);--tint:#edbc7f0c;--edge:#edbc7f33}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;margin-bottom:20px}.stat{position:relative;background:linear-gradient(120deg,var(--tint),transparent),var(--surface);border:1px solid var(--edge);border-radius:var(--radius);padding:17px 21px 19px;min-width:0;overflow:hidden}.stat::before{content:'';position:absolute;left:0;top:20px;height:26px;width:3px;background:var(--accent);border-radius:0 4px 4px 0}.stat-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:14px}.stat-label{color:#b4bdc8;font-size:11px}.stat-icon{color:var(--accent);opacity:.8}.stat-icon svg{width:18px;height:18px}.stat-value{font-size:32px;letter-spacing:-.8px;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.stat-foot{font-size:10px;color:#7e8c9d;margin-top:9px}
+    .charts-grid{display:grid;grid-template-columns:1fr 1fr 1.15fr;gap:17px;margin-bottom:33px}.chart-panel{background:#121922;border:1px solid #25303b;border-radius:var(--radius);padding:20px;min-width:0;display:flex;flex-direction:column}.chart-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:22px}.chart-heading h2{font-size:13px;font-weight:550;letter-spacing:0}.chart-heading>svg{color:#65758a;width:15px;height:15px}.chart-tag{font-size:8px;letter-spacing:1px;color:#8290a3;background:#1c2531;padding:5px 6px;border-radius:5px}.balance-chart{display:grid;gap:19px;margin:2px 0 24px}.comparison-row>div:first-child{display:flex;justify-content:space-between;gap:10px;font-size:10px;color:#9aa8b9;margin-bottom:10px}.comparison-row strong{font-size:11px;font-weight:550;color:var(--accent);font-variant-numeric:tabular-nums}.comparison-track{height:8px;border-radius:4px;background:#222c39;overflow:hidden}.comparison-track span{display:block;height:100%;background:var(--accent);border-radius:4px;transform-origin:left;box-shadow:0 0 15px var(--accent)}.net-position{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;border-top:1px solid #29323f;padding-top:16px;font-size:10px;color:#abb5c2}.net-position small{display:block;font-size:9px;color:#79879a;margin-top:5px}.net-position strong{font-size:19px;letter-spacing:-.5px;font-weight:550;overflow-wrap:anywhere}.positive{color:var(--investment)}.negative{color:#dba48f}.mix-layout{display:flex;align-items:center;gap:13px;flex:1;margin-top:-9px}.donut-wrap{flex:0 0 133px;width:133px;height:144px;display:grid;place-items:center}.donut{width:100%;height:auto;overflow:visible;stroke-width:14px;stroke-linecap:butt}.donut-track{stroke:#25303d;fill:none}.donut-segment{fill:none;transition:opacity .2s,stroke-width .2s}.donut-segment.dimmed{opacity:.16}.donut-segment.highlighted{stroke-width:18px}.donut text{stroke:none;text-anchor:middle}.donut-main{fill:#e4eaf3;font-size:27px;font-weight:600}.donut-sub{fill:#8594a7;font-size:11px}.mix-legend{min-width:0;flex:1;display:grid;gap:6px}.legend-item{display:flex;align-items:center;gap:7px;width:100%;padding:6px 0;border:0;background:transparent;text-align:left;color:#a0adbd;font-size:10px;min-width:0;border-radius:4px}.legend-item:hover,.legend-item[aria-pressed=true]{color:white;background:#1c2633}.legend-name{min-width:0;overflow-wrap:anywhere;flex:1}.legend-item strong{color:#d2dbe6;font-size:10px;font-weight:500}.swatch{width:6px;height:6px;border-radius:50%;flex-shrink:0}.chart-note{color:#78899c;font-size:9px;line-height:1.6;margin-top:16px}.runway-panel .chart-heading{margin-bottom:12px}.runway-readout{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:2px}.runway-readout strong{font-size:19px;font-weight:550;letter-spacing:-.5px;color:#edbc7f}.runway-readout span{font-size:9px;color:#a4adba;text-align:right}.runway-chart{flex:1;min-width:0}.runway-chart svg{display:block;width:100%;height:136px;stroke-width:1;overflow:visible}.chart-grid{stroke:#344051;stroke-dasharray:3 5;opacity:.55}.runway-line{stroke:#edbc7f;stroke-width:2.5;fill:none;stroke-linejoin:round}.runway-chart text{font-size:10px;fill:#8091a6;stroke:none}.runway-chart circle{stroke:#121922;stroke-width:2;fill:#ffe0a9;filter:drop-shadow(0 0 4px #edbc7f66)}.runway-control{display:block;height:12px}.runway-control input{display:block;width:100%;height:4px;margin:0;accent-color:#edbc7f;cursor:ew-resize}.runway-control input:disabled{cursor:default}.runway-panel .chart-note{margin-top:8px}
+    .category{margin-bottom:31px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:17px}.section-title{display:flex;align-items:center;gap:9px}.section-icon{display:flex;color:var(--accent)}.section-icon svg{width:18px;height:18px}.section-title h2{font-size:19px;font-weight:600;letter-spacing:-.3px}.pill{font-size:10px;color:#8e9cb0;background:#202a36;border:1px solid #2c3846;padding:2px 6px;border-radius:5px}.section-description{font-size:10px;color:#8290a3;margin-top:8px}.sort{background:#171f2a;border:1px solid #2b3746;color:#a3b0c0;border-radius:7px;padding:8px 10px;font-size:10px;max-width:160px}.section-total{display:flex;align-items:center;gap:13px;text-align:right}.section-total span{font-size:10px;color:#8594a6}.section-total strong{font-size:17px;font-weight:550;letter-spacing:-.4px;color:var(--accent)}.entry-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.entry-card{position:relative;min-width:0;border:1px solid #2a3442;border-radius:var(--radius);background:linear-gradient(125deg,var(--tint),transparent 70%),#141b25;padding:20px 21px 18px;overflow:hidden;transition:border-color .2s,box-shadow .2s,transform .2s}.entry-card:hover{border-color:var(--accent);box-shadow:0 7px 25px #00000024;transform:translateY(-3px)}.entry-top{display:flex;justify-content:space-between;gap:12px;align-items:center;min-height:25px;margin-bottom:21px}.entry-top h3{font-size:13px;font-weight:550;color:#d9e1eb;overflow-wrap:anywhere}.entry-badge{font-size:8px;padding:5px 7px;border-radius:5px;background:#fa917e12;color:#d7a091;white-space:nowrap;border:1px solid #fa917e20}.entry-badge.cleared{color:var(--investment);background:#54d9b010;border-color:#54d9b033}.amount-caption{font-size:9px;color:#8392a4;margin-bottom:7px}.entry-amount{font-size:29px;font-weight:550;letter-spacing:-.6px;color:var(--accent);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.debt-metrics{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #303947;margin-top:18px;padding-top:15px;gap:12px}.debt-metrics>div:last-child{border-left:1px solid #303947;padding-left:18px}.debt-metrics span{display:block;font-size:9px;color:#8291a3;margin-bottom:6px}.debt-metrics strong{font-size:15px;color:#c8d1de;font-weight:500;font-variant-numeric:tabular-nums}.debt-metrics small{font-size:10px;font-weight:400;color:#7d8da3}.entry-bottom{display:flex;justify-content:space-between;gap:8px;font-size:9px;color:#7e8da2;margin-top:20px;margin-bottom:9px}.entry-bottom strong{font-weight:500;color:var(--accent)}.mini-track{height:4px;background:#283140;border-radius:3px;overflow:hidden}.mini-track span{display:block;height:100%;background:var(--accent);border-radius:3px;transform-origin:left}.entry-symbol{color:var(--investment);display:grid;place-items:center;border-radius:8px;background:#54d9b00b;width:30px;height:30px}.entry-symbol svg{width:16px;height:16px}.plan-number{font-size:22px;font-weight:600;letter-spacing:-1px;color:#b59af34f}.section-note{font-size:9px;color:#7b879a;margin-top:12px}.empty{grid-column:1/-1;border:1px dashed #334052;border-radius:12px;text-align:center;padding:30px;color:#8fa0b4;font-size:12px;line-height:1.7}.footnote{display:flex;justify-content:space-between;gap:15px;font-size:9px;color:#637286;border-top:1px solid #202936;padding-top:16px}.data-name{max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    dialog{color-scheme:dark;border:1px solid #354052;border-radius:16px;padding:0;width:min(880px,calc(100% - 28px));max-height:90dvh;background:#131b26;color:var(--ink);box-shadow:0 24px 100px #0008}dialog::backdrop{background:#05080cbf;backdrop-filter:blur(5px)}.editor-head{padding:24px 26px 20px;border-bottom:1px solid #2e3948;background:#17212d}.editor-head h2{font-size:21px;color:#d8e3d0}.editor-head p{color:#97a5b8;font-size:12px;line-height:1.6;margin-top:8px}.editor-body{padding:23px 26px}.editor-meta{display:grid;grid-template-columns:1fr 1fr;gap:16px}.editor-field{display:flex;flex-direction:column;gap:7px;font-size:11px;color:#97a5b8;min-width:0}.editor-field input{width:100%;min-width:0;border:1px solid #344255;border-radius:7px;padding:10px;background:#101822;color:#dbe5ef;font-size:13px}.editor-field input:focus{outline:2px solid #9fbd7a;outline-offset:1px}.sample-toggle{display:flex;gap:9px;align-items:center;font-size:12px;color:#9caabd;margin:18px 0 26px}.sample-toggle input{accent-color:#b9dc8c}.edit-section{border:0;padding:0;margin:0 0 25px;min-width:0}.edit-section legend{font-size:15px;font-weight:600;margin-bottom:13px}.edit-section:nth-of-type(1) legend{color:var(--debt)}.edit-section:nth-of-type(2) legend{color:var(--investment)}.edit-section:nth-of-type(3) legend{color:var(--plan)}.edit-row{display:grid;grid-template-columns:minmax(140px,1.6fr) repeat(3,minmax(90px,1fr)) 32px;gap:10px;align-items:end;margin-bottom:12px;background:#1b2532;padding:12px;border-radius:9px}.edit-row.simple{grid-template-columns:minmax(120px,1.6fr) minmax(110px,1fr) 32px}.remove-row{border:1px solid #76493f;background:#362823;color:#ea9a87;border-radius:6px;height:35px;width:32px;font-size:21px;flex:none}.editor-footer{position:sticky;bottom:0;background:#17212d;border-top:1px solid #2e3948;padding:17px 26px;display:flex;justify-content:flex-end;gap:10px}.editor-empty{font-size:12px;color:var(--muted);padding:0 0 15px}.editor-error{margin-top:18px;margin-bottom:0}.editor-add{font-size:11px}
+    @media(max-width:1150px){main{padding-inline:28px}.stat{padding-inline:17px}.stat-value{font-size:28px}.charts-grid{grid-template-columns:1fr 1fr}.runway-panel{grid-column:1/-1}.runway-chart svg{height:150px}.runway-readout{justify-content:flex-start;gap:14px}.mix-layout{gap:20px}.donut-wrap{flex-basis:145px;width:145px}.entry-card{padding-inline:17px}.entry-amount{font-size:26px}}
+    @media(max-width:800px){main{padding-inline:22px}.stats{grid-template-columns:1fr 1fr;gap:12px}.stat-value{font-size:30px}.entry-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.entry-grid>.entry-card:last-child:nth-child(odd){grid-column:1/-1}.charts-grid{gap:13px}.chart-panel{padding:18px}.mix-layout{flex-direction:column;gap:6px}.mix-legend{width:100%}.donut-wrap{height:125px;flex-basis:auto;width:125px}.legend-item{font-size:10px}.chart-note{margin-top:11px}h1{font-size:38px}.section-total{display:block}.section-total span{display:block;margin-bottom:5px}}
+    @media(max-width:600px){main{padding:18px 15px}.topbar{gap:16px;flex-wrap:wrap;padding-bottom:17px}.workspace-label{font-size:9px;letter-spacing:1.7px}.actions{gap:6px}.btn{font-size:10px;padding:9px 10px}.hero{padding:27px 0 23px;display:block}h1{font-size:36px;letter-spacing:-1.1px}.month-block{margin-top:20px;display:flex;align-items:center;gap:12px;text-align:left}.month-chip{font-size:10px;padding:8px 10px}.updated{font-size:9px;margin:0}.notice{font-size:10px;align-items:flex-start}.stat{padding:16px 14px}.stat-value{font-size:25px}.stat-label{font-size:10px}.stat-foot{font-size:9px}.stat-top{margin-bottom:13px}.stats{gap:10px;margin-bottom:16px}.stat-icon svg{width:15px;height:15px}.charts-grid{grid-template-columns:1fr;gap:13px;margin-bottom:27px}.runway-panel{grid-column:auto}.chart-panel{padding:20px}.chart-heading{margin-bottom:21px}.mix-layout{flex-direction:row;gap:20px}.donut-wrap{width:140px;flex-basis:140px;height:145px}.mix-legend{width:auto}.runway-chart svg{height:auto}.entry-grid{grid-template-columns:1fr;gap:12px}.entry-card{padding:20px}.entry-grid>.entry-card:last-child:nth-child(odd){grid-column:auto}.entry-amount{font-size:30px}.entry-top{margin-bottom:19px}.category{margin-bottom:27px}.section-title h2{font-size:18px}.section-description{font-size:9px}.section-head{gap:10px}.sort{font-size:9px;max-width:125px}.section-total strong{font-size:15px}.section-total span{font-size:9px}.section-note{font-size:9px;line-height:1.6}.footnote{font-size:9px}.welcome .btn + .btn{margin-top:10px}}
+    @media(max-width:380px){.stat-value{font-size:22px}.stat-label{font-size:9px}.stat-icon{display:none}.mix-layout{gap:10px}.donut-wrap{width:112px;flex-basis:112px;height:126px}.legend-item,.legend-item strong{font-size:9px}.month-block{gap:8px}.updated{font-size:8px}}
+    @media(max-width:700px){.edit-row{grid-template-columns:repeat(3,minmax(0,1fr)) 30px}.edit-row .editor-field:first-child{grid-column:1/-1}.edit-row.simple{grid-template-columns:1fr 30px}.edit-row.simple .editor-field:first-child{grid-column:1/-1}.editor-head,.editor-body{padding:20px 17px}.editor-footer{padding:15px 17px}.edit-row{gap:8px;padding:10px}.editor-field{font-size:10px}.editor-field input{font-size:12px;padding:9px 6px}.editor-footer .btn{flex:initial}}
+    @media(prefers-reduced-motion:no-preference){.reveal:not(.visible){opacity:1;transform:none}.reveal.visible{animation:reveal .5s ease both;animation-delay:var(--delay,0ms)}.stat{animation:reveal .5s ease both}.stat:nth-child(2){animation-delay:.06s}.stat:nth-child(3){animation-delay:.12s}.stat:nth-child(4){animation-delay:.18s}.visible .comparison-track span,.visible .mini-track span{animation:grow .9s cubic-bezier(.22,.7,.3,1) both;animation-delay:var(--delay,0ms)}.visible .donut-segment{animation:arc-in 1s ease both;animation-delay:var(--delay,0ms)}.visible .runway-line{stroke-dasharray:1;animation:draw-line 1.25s ease both}@keyframes reveal{from{transform:translateY(12px)}to{transform:none}}@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}@keyframes arc-in{from{stroke-dasharray:0 100}to{stroke-dasharray:var(--arc)}}@keyframes draw-line{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.entry-card,.donut-segment{transition:none}.entry-card:hover,.btn:hover:not(:disabled){transform:none}}
+    @media print{@page{size:A4;margin:12mm}:root{color-scheme:light}body{background:white;color:#17212d}main{margin:0;padding:0;max-width:none}.actions,.notice,.sort,.welcome,.skip,.runway-control{display:none!important}.topbar{padding-bottom:12px}.hero{padding-block:18px}h1{font-size:28px}h1 span{color:#345c34}.stats{gap:9px}.stat-value{font-size:21px}.stat-label{font-size:10px}.charts-grid{grid-template-columns:1fr 1fr}.chart-panel,.entry-card,.stat{break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}.entry-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.section-title h2{color:#17212d}.section-description,.section-note{color:#596572}.category{margin-top:20px}.reveal,.reveal:not(.visible),.reveal.visible,.stat{opacity:1;transform:none;animation:none!important}.comparison-track span,.mini-track span,.donut-segment,.runway-line{animation:none!important}.runway-line{stroke-dashoffset:0}.month-chip{background:#f4f6f0;color:#34472c}.entry-card{transition:none}.workspace-label{color:#394b36}.chart-panel{color:#e9edf4}.section-total strong{color:#2e4f45}.chart-note{color:#aab7c8}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to dashboard</a>
+  <main id="main">
+    <header class="topbar" id="overview">
+      <div class="workspace-label"><span class="status-dot"></span>PERSONAL FINANCE</div>
+      <div class="actions">
+        <button class="btn" id="download" disabled><span data-icon="download"></span>Download JSON</button>
+        <button class="btn btn-primary" id="edit" disabled><span data-icon="edit"></span>Edit numbers</button>
+        <input type="file" id="file-input" accept=".json,application/json" hidden aria-label="Load dashboard JSON">
+      </div>
+    </header>
+    <section class="hero" aria-labelledby="page-title">
+      <div><h1 id="page-title">I’ve got this.<br><span>The world is mine.</span></h1></div>
+      <div class="month-block"><div class="month-chip"><span data-icon="calendar"></span><span id="month">Monthly snapshot</span></div><div class="updated" id="updated">Loading data.json…</div></div>
+    </section>
+    <div id="error" class="notice error" role="alert" hidden></div>
+    <div id="sample" class="notice" hidden><span data-icon="info"></span><span><strong>Sample numbers.</strong> Use Edit numbers to replace them, then turn off “These are sample numbers”.</span></div>
+    <div id="edited" class="notice edited-notice" role="status" hidden></div>
+    <div id="welcome" class="welcome"><h2 id="welcome-title">Loading your dashboard</h2><p id="welcome-copy">Loading data.json from the project folder…</p><button id="retry" class="btn btn-primary" hidden>Retry loading</button><button id="welcome-load" class="btn" hidden><span data-icon="upload"></span>Import a JSON file instead</button><div id="local-help" class="local-help" hidden>Double-click <strong>Start Dashboard.command</strong> in this folder.<br>Or run <code>python3 -m http.server 8000 --bind 127.0.0.1</code><br>and open <a href="http://127.0.0.1:8000">http://127.0.0.1:8000</a>.</div></div>
+    <div id="dashboard" hidden>
+      <section class="stats" aria-label="Financial summary">
+        <article class="stat debt-tone"><div class="stat-top"><span class="stat-label">Outstanding debt</span><span class="stat-icon" data-icon="debt"></span></div><div id="total-debt" class="stat-value"></div><div id="debt-detail" class="stat-foot"></div></article>
+        <article class="stat investment-tone"><div class="stat-top"><span class="stat-label">Investment capital</span><span class="stat-icon" data-icon="chart"></span></div><div id="total-investment" class="stat-value"></div><div id="investment-detail" class="stat-foot"></div></article>
+        <article class="stat emi-tone"><div class="stat-top"><span class="stat-label">Monthly EMI</span><span class="stat-icon" data-icon="calendar"></span></div><div id="total-emi" class="stat-value"></div><div class="stat-foot">Current monthly payments</div></article>
+        <article class="stat plan-tone"><div class="stat-top"><span class="stat-label">Plan budget</span><span class="stat-icon" data-icon="flag"></span></div><div id="total-plans" class="stat-value"></div><div id="plan-detail" class="stat-foot"></div></article>
+      </section>
+      <section class="charts-grid" aria-label="Financial charts">
+        <article class="chart-panel reveal"><div class="chart-heading"><h2>Where I stand</h2><span data-icon="grid"></span></div><div id="balance-chart" class="balance-chart"></div><div class="net-position"><div><span>Tracked balance</span><small>Investments − debt principal</small></div><strong id="balance"></strong></div></article>
+        <article class="chart-panel reveal"><div class="chart-heading"><h2>Investment mix</h2><span class="chart-tag">ALLOCATION</span></div><div class="mix-layout"><div id="allocation" class="donut-wrap"></div><div id="mix-legend" class="mix-legend"></div></div><p class="chart-note">Current capital, not returns. Select a holding to highlight it.</p></article>
+        <article class="chart-panel runway-panel reveal"><div class="chart-heading"><h2>EMI runway</h2><span class="chart-tag">SCHEDULE</span></div><div class="runway-readout"><strong id="runway-amount"></strong><span id="runway-month"></span></div><div id="runway-chart" class="runway-chart"></div><label class="runway-control"><span class="sr-only">Explore scheduled EMI by month</span><input id="runway-slider" type="range" min="0" max="60" value="0" step="1"></label><p class="chart-note">Drag to explore. Assumes your loan schedules stay unchanged.</p></article>
+      </section>
+      <section id="debts" class="category debt-tone" aria-labelledby="debts-title">
+        <div class="section-head"><div><div class="section-title"><span class="section-icon" data-icon="debt"></span><h2 id="debts-title">Debts</h2><span class="pill" id="debt-pill"></span></div><p class="section-description">Remaining principal and repayment schedule.</p></div><label><span class="sr-only">Sort debts</span><select id="debt-sort" class="sort"><option value="principal">Largest balance</option><option value="months">Ending soonest</option><option value="emi">Highest EMI</option><option value="lender">Lender A–Z</option></select></label></div>
+        <div id="debt-rows" class="entry-grid"></div>
+      </section>
+      <section id="investments" class="category investment-tone" aria-labelledby="investments-title">
+        <div class="section-head"><div><div class="section-title"><span class="section-icon" data-icon="chart"></span><h2 id="investments-title">Investments</h2><span class="pill" id="investment-pill"></span></div><p class="section-description">Current capital by holding.</p></div><div class="section-total"><span>Total capital</span><strong id="investment-total"></strong></div></div><div id="investment-rows" class="entry-grid"></div>
+      </section>
+      <section id="plans" class="category plan-tone" aria-labelledby="plans-title">
+        <div class="section-head"><div><div class="section-title"><span class="section-icon" data-icon="flag"></span><h2 id="plans-title">Plans</h2><span class="pill" id="plan-pill"></span></div><p class="section-description">Targets and amounts needed.</p></div><div class="section-total"><span>Total needed</span><strong id="plan-total"></strong></div></div><div id="plan-rows" class="entry-grid"></div><p class="section-note">Plan bars show each target’s share of the total budget, not savings progress.</p>
+      </section>
+    </div>
+    <footer class="footnote"><span id="source" class="data-name">data.json</span><span>Monthly snapshot</span></footer>
+    <div id="status" class="sr-only" role="status" aria-live="polite"></div>
+  </main>
+  <dialog id="editor" aria-labelledby="editor-title" aria-describedby="editor-description">
+    <form id="editor-form">
+      <div class="editor-head"><h2 id="editor-title">Edit your monthly snapshot</h2><p id="editor-description">Update your numbers, then download data.json and replace it in GitHub. Changes here do not overwrite the published file.</p></div>
+      <div class="editor-body">
+        <div class="editor-meta"><label class="editor-field">Month<input id="edit-month" type="month" required min="1000-01" max="9999-12"></label><label class="editor-field">Updated on<input id="edit-date" type="date" required min="1000-01-01" max="9999-12-31"></label></div>
+        <label class="sample-toggle"><input id="edit-sample" type="checkbox">These are sample numbers</label>
+        <fieldset class="edit-section"><legend>Debts</legend><div id="edit-debts"></div><button class="btn editor-add" type="button" data-add="debts">+ Add debt</button></fieldset>
+        <fieldset class="edit-section"><legend>Investments</legend><div id="edit-investments"></div><button class="btn editor-add" type="button" data-add="investments">+ Add investment</button></fieldset>
+        <fieldset class="edit-section"><legend>Plans</legend><div id="edit-plans"></div><button class="btn editor-add" type="button" data-add="plans">+ Add plan</button></fieldset>
+        <div class="notice error editor-error" id="editor-error" role="alert" hidden></div>
+      </div>
+      <div class="editor-footer"><button type="button" class="btn" id="cancel-edit">Cancel</button><button type="submit" class="btn btn-primary"><span data-icon="download"></span>Apply &amp; download JSON</button></div>
+    </form>
+  </dialog>
+  <script>
+    'use strict';
+    const paths = {
+      edit:'<path d="m15 5 4 4M4 20l5-1L20 8a2.8 2.8 0 0 0-4-4L5 15l-1 5Z"/>',
+      grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+      debt:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18M7 15h4"/>',
+      chart:'<path d="M4 20V11m5 9V7m5 13v-5m5 5V4"/>',
+      calendar:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 11h18m-13 5h2m4 0h2"/>',
+      flag:'<path d="M5 21V3m0 1c5-4 9 4 14 0v10c-5 4-9-4-14 0"/>',
+      download:'<path d="M12 3v12m-4-4 4 4 4-4M4 16v5h16v-5"/>',
+      upload:'<path d="M12 16V4m-4 4 4-4 4 4M4 16v5h16v-5"/>',
+      info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-9v.1"/>',
+      spark:'<path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Z"/>',
+      arrow:'<path d="M5 12h14m-5-5 5 5-5 5"/>',
+      lock:'<rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2"/>',
+      clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'
+    };
+    const icon = name => `<svg viewBox="0 0 24 24" aria-hidden="true">${paths[name] || paths.flag}</svg>`;
+    document.querySelectorAll('[data-icon]').forEach(el => el.innerHTML = icon(el.dataset.icon));
+    const $ = id => document.getElementById(id);
+    const escapeHTML = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const sum = (rows, key) => rows.reduce((total, row) => total + row[key], 0);
+    const plural = (n, one, many = one + 's') => `${n} ${n === 1 ? one : many}`;
+    const colors = ['#4edab1','#58a4e8','#b396ff','#edbf73','#ea879c','#79b8b0'];
+    let data = null;
+    let money = value => String(value);
+    let loadSequence = 0;
+    let editingDirty = false;
+    const editorFields = {
+      debts: [['lender','Lender','text'],['monthsRemaining','Months left','integer'],['emiAmount','Monthly EMI','amount'],['principalRemaining','Principal left','amount']],
+      investments: [['name','Name','text'],['currentCapital','Current capital','amount']],
+      plans: [['name','Plan','text'],['amountNeeded','Amount needed','amount']]
+    };
+
+    function appendEditRow(section, row = {}, focus = false) {
+      const container = $('edit-' + section);
+      container.querySelector('.editor-empty')?.remove();
+      const el = document.createElement('div');
+      el.className = 'edit-row' + (section === 'debts' ? '' : ' simple');
+      el.innerHTML = editorFields[section].map(([key,label,type]) => `<label class="editor-field">${label}${type === 'amount' ? ' (' + escapeHTML(data.currency) + ')' : ''}<input data-field="${key}" ${type === 'text' ? 'type="text" maxlength="200"' : `type="number" min="0" max="${type === 'integer' ? 1200 : 1e12}" step="${type === 'integer' ? 1 : 'any'}"`} required value="${escapeHTML(row[key] ?? (type === 'text' ? '' : 0))}"></label>`).join('');
+      const remove = document.createElement('button');
+      remove.type = 'button'; remove.className = 'remove-row'; remove.textContent = '×';
+      remove.setAttribute('aria-label','Remove ' + (row[editorFields[section][0][0]] || section.slice(0,-1)));
+      remove.addEventListener('click',()=>{ el.remove(); editingDirty = true; updateEditEmpty(section); document.querySelector(`[data-add="${section}"]`).focus(); });
+      el.append(remove); container.append(el);
+      if (focus) el.querySelector('input').focus();
+    }
+    function updateEditEmpty(section) {
+      const container = $('edit-' + section);
+      if (!container.children.length) container.innerHTML = '<p class="editor-empty">No entries. Add one below when you need it.</p>';
+    }
+    function openEditor() {
+      if (!data) return;
+      $('edit-month').value = data.month;
+      const today = new Date();
+      $('edit-date').value = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+      $('edit-sample').checked = data.isSampleData;
+      for (const section of Object.keys(editorFields)) {
+        $('edit-' + section).replaceChildren();
+        data[section].forEach(row=>appendEditRow(section,row));
+        updateEditEmpty(section);
+      }
+      $('editor-error').hidden = true;
+      editingDirty = false;
+      $('editor').showModal();
+      $('editor').scrollTop = 0;
+    }
+    function readEditor() {
+      const draft = {...data,month:$('edit-month').value,updatedAt:$('edit-date').value,isSampleData:$('edit-sample').checked};
+      for (const section of Object.keys(editorFields)) {
+        draft[section] = [...$('edit-' + section).querySelectorAll('.edit-row')].map(row=>Object.fromEntries([...row.querySelectorAll('input')].map(input=>[input.dataset.field,input.type === 'number' ? input.valueAsNumber : input.value])));
+      }
+      return validate(draft);
+    }
+    function downloadData() {
+      if (!data) return;
+      const url = URL.createObjectURL(new Blob([JSON.stringify(data,null,2)+'\n'],{type:'application/json'}));
+      const link = document.createElement('a');
+      link.href=url; link.download='data.json'; document.body.append(link); link.click(); link.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),1000);
+      $('status').textContent='Download requested. Replace data.json in GitHub with the downloaded file.';
+    }
+    $('edit').addEventListener('click',openEditor);
+    $('editor-form').addEventListener('input',()=>{editingDirty=true;$('editor-error').hidden=true;});
+    document.querySelectorAll('[data-add]').forEach(button=>button.addEventListener('click',()=>{appendEditRow(button.dataset.add,{},true);editingDirty=true;}));
+    $('cancel-edit').addEventListener('click',()=>{editingDirty=false;$('editor').close();});
+    $('editor').addEventListener('cancel',()=>{editingDirty=false;});
+    window.addEventListener('beforeunload',event=>{if(editingDirty){event.preventDefault();event.returnValue='';}});
+    $('editor-form').addEventListener('submit',event=>{
+      event.preventDefault();
+      try {
+        const draft = readEditor();
+        applyData(draft,'edited snapshot');
+        $('edited').textContent = 'Your edits are shown below. Replace data.json in GitHub with the downloaded file to publish them. Until then, refreshing loads the original project file.';
+        $('edited').hidden = false;
+        downloadData();
+        editingDirty = false;
+        $('editor').close();
+      } catch(error) {
+        $('editor-error').textContent = error.message;
+        $('editor-error').hidden = false;
+        $('editor-error').scrollIntoView({block:'nearest'});
+      }
+    });
+
+    function validate(input) {
+      if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('The JSON must contain a dashboard object.');
+      if (typeof input.month !== 'string' || !/^[1-9]\d{3}-(0[1-9]|1[0-2])$/.test(input.month)) throw new Error('month must use YYYY-MM, for example 2026-10.');
+      if (typeof input.updatedAt !== 'string' || !/^[1-9]\d{3}-\d{2}-\d{2}$/.test(input.updatedAt) || !Number.isFinite(Date.parse(input.updatedAt + 'T00:00:00Z')) || new Date(input.updatedAt + 'T00:00:00Z').toISOString().slice(0,10) !== input.updatedAt) throw new Error('updatedAt must be a real date in YYYY-MM-DD format.');
+      if (typeof input.isSampleData !== 'boolean') throw new Error('Set isSampleData to true for examples or false for your real numbers.');
+      const currency = input.currency ?? 'INR';
+      const locale = input.locale ?? 'en-IN';
+      if (typeof currency !== 'string' || !/^[A-Z]{3}$/.test(currency)) throw new Error('currency must be a three-letter currency code, for example INR.');
+      if (typeof locale !== 'string') throw new Error('locale must be a language tag, for example en-IN.');
+      try { new Intl.NumberFormat(locale, {style:'currency',currency}); } catch { throw new Error('Check currency and locale. Use INR and en-IN for Indian rupees.'); }
+      const rules = { debts: ['lender','monthsRemaining','emiAmount','principalRemaining'], investments: ['name','currentCapital'], plans: ['name','amountNeeded'] };
+      const result = {month:input.month,updatedAt:input.updatedAt,currency,locale,isSampleData:input.isSampleData};
+      for (const [section, fields] of Object.entries(rules)) {
+        if (!Array.isArray(input[section])) throw new Error(`${section} must be an array. Use [] if it has no entries.`);
+        if (input[section].length > 1000) throw new Error(`${section} has too many entries (maximum 1,000).`);
+        result[section] = input[section].map((row, i) => {
+          const label = `${section}, entry ${i + 1}`;
+          if (!row || typeof row !== 'object' || Array.isArray(row)) throw new Error(`${label} must be an object.`);
+          const clean = {};
+          for (const field of fields) {
+            const value = row[field];
+            if (field === fields[0]) {
+              if (typeof value !== 'string' || !value.trim() || value.length > 200) throw new Error(`${label}: ${field} must be a name between 1 and 200 characters.`);
+              clean[field] = value.trim();
+            } else {
+              if (typeof value !== 'number' || !Number.isFinite(value) || value < 0 || value > 1e12) throw new Error(`${label}: ${field} must be a nonnegative number, without quotes or commas (maximum 1 trillion).`);
+              if (field === 'monthsRemaining' && (!Number.isInteger(value) || value > 1200)) throw new Error(`${label}: monthsRemaining must be a whole number between 0 and 1,200.`);
+              clean[field] = value;
+            }
+          }
+          if (section === 'debts' && clean.principalRemaining > 0 && clean.monthsRemaining === 0) throw new Error(`${label}: a debt with outstanding principal needs monthsRemaining greater than zero.`);
+          return clean;
+        });
+      }
+      return result;
+    }
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const revealObserver = 'IntersectionObserver' in window ? new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');revealObserver.unobserve(entry.target);}});
+    },{threshold:0.06}) : null;
+    function revealCards() {
+      document.querySelectorAll('.reveal:not(.visible)').forEach((el,i)=>{
+        el.style.setProperty('--delay',Math.min(i%3,2)*65+'ms');
+        if(reducedMotion.matches || !revealObserver) el.classList.add('visible');
+        else revealObserver.observe(el);
+      });
+    }
+    function percentage(value,total) { return total ? value/total*100 : 0; }
+    function percentLabel(value,total) { return new Intl.NumberFormat(data.locale,{maximumFractionDigits:1}).format(percentage(value,total))+'%'; }
+    function barMarkup(value,total) { return `<div class="mini-track" aria-hidden="true"><span style="width:${percentage(value,total)}%"></span></div>`; }
+    function renderDebts() {
+      if (!data) return;
+      const rows = [...data.debts];
+      const total=sum(rows,'principalRemaining');
+      const sorts = {principal:(a,b)=>b.principalRemaining-a.principalRemaining,months:(a,b)=>a.monthsRemaining-b.monthsRemaining,emi:(a,b)=>b.emiAmount-a.emiAmount,lender:(a,b)=>a.lender.localeCompare(b.lender)};
+      rows.sort(sorts[$('debt-sort').value]);
+      $('debt-rows').innerHTML = rows.length ? rows.map(d=>`<article class="entry-card debt-tone reveal"><div class="entry-top"><h3>${escapeHTML(d.lender)}</h3><span class="entry-badge ${d.principalRemaining===0 ? 'cleared' : ''}">${d.principalRemaining===0 ? 'Cleared' : 'Active'}</span></div><div class="amount-caption">Principal remaining</div><div class="entry-amount">${escapeHTML(money(d.principalRemaining))}</div><div class="debt-metrics"><div><span>Monthly EMI</span><strong>${escapeHTML(money(d.principalRemaining>0 ? d.emiAmount : 0))}</strong></div><div><span>Months remaining</span><strong>${d.principalRemaining>0 ? d.monthsRemaining : 0}<small> mo</small></strong></div></div><div class="entry-bottom"><span>${percentLabel(d.principalRemaining,total)} of outstanding debt</span></div>${barMarkup(d.principalRemaining,total)}</article>`).join('') : '<div class="empty">No outstanding loans listed. You’re in control.</div>';
+      revealCards();
+    }
+    function renderBalanceChart(debts,capital) {
+      const max=Math.max(debts,capital,1);
+      $('balance-chart').innerHTML=[['Debt principal',debts,'debt-tone'],['Investment capital',capital,'investment-tone']].map(([label,value,tone])=>`<div class="comparison-row ${tone}"><div><span>${label}</span><strong>${escapeHTML(money(value))}</strong></div><div class="comparison-track" role="img" aria-label="${label}: ${escapeHTML(money(value))}"><span style="width:${value/max*100}%"></span></div></div>`).join('');
+      $('balance').textContent=money(capital-debts);
+      $('balance').className=capital>=debts ? 'positive' : 'negative';
+    }
+    function renderAllocation(investments,capital) {
+      $('allocation').hidden=false;
+      if(capital===0) {
+        $('allocation').innerHTML='<svg class="donut" viewBox="0 0 160 160" role="img" aria-label="No investment capital recorded"><circle class="donut-track" cx="80" cy="80" r="61"/><text x="80" y="78" class="donut-main">0</text><text x="80" y="96" class="donut-sub">capital</text></svg>';
+        $('mix-legend').innerHTML='<p class="chart-note">No capital recorded yet.</p>';return;
+      }
+      const segments=investments.filter(i=>i.currentCapital>0).slice(0,5).map(i=>({...i}));
+      const rest=investments.filter(i=>i.currentCapital>0).slice(5);
+      if(rest.length)segments.push({name:'Other holdings',currentCapital:sum(rest,'currentCapital')});
+      let offset=0;
+      const arcs=segments.map((item,i)=>{const share=percentage(item.currentCapital,capital);const length=segments.length>1 ? Math.max(share-Math.min(.9,share*.15),0) : share;const arc=`<circle class="donut-segment" data-segment="${i}" cx="80" cy="80" r="61" pathLength="100" stroke="${colors[i]}" stroke-dasharray="${length} ${100-length}" stroke-dashoffset="${-offset}" style="--arc:${length} ${100-length};--delay:${i*75}ms"><title>${escapeHTML(item.name)}: ${escapeHTML(money(item.currentCapital))} (${percentLabel(item.currentCapital,capital)})</title></circle>`;offset+=share;return arc;}).join('');
+      $('allocation').innerHTML=`<svg class="donut" viewBox="0 0 160 160" role="img" aria-label="Investment allocation: ${escapeHTML(segments.map(i=>i.name+' '+percentLabel(i.currentCapital,capital)).join(', '))}"><circle class="donut-track" cx="80" cy="80" r="61"/><g transform="rotate(-90 80 80)">${arcs}</g><text x="80" y="78" class="donut-main">${investments.length}</text><text x="80" y="97" class="donut-sub">holdings</text></svg>`;
+      $('mix-legend').innerHTML=segments.map((item,i)=>`<button type="button" class="legend-item" data-highlight="${i}" aria-pressed="false" title="${escapeHTML(item.name)} · ${escapeHTML(money(item.currentCapital))}"><span class="swatch" style="background:${colors[i]}"></span><span class="legend-name">${escapeHTML(item.name)}</span><strong>${percentLabel(item.currentCapital,capital)}</strong></button>`).join('');
+      $('mix-legend').querySelectorAll('button').forEach(button=>button.addEventListener('click',()=>{
+        const next=button.getAttribute('aria-pressed')!=='true';
+        $('mix-legend').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(next&&b===button)));
+        $('allocation').querySelectorAll('.donut-segment').forEach(arc=>{arc.classList.toggle('dimmed',next&&arc.dataset.segment!==button.dataset.highlight);arc.classList.toggle('highlighted',next&&arc.dataset.segment===button.dataset.highlight);});
+      }));
+    }
+    function runwayState(month) {
+      const active=data.debts.filter(d=>d.principalRemaining>0);
+      return {active,maxMonth:active.length?Math.max(...active.map(d=>d.monthsRemaining)):0,total:sum(active,'emiAmount'),amount:sum(active.filter(d=>d.monthsRemaining>month),'emiAmount')};
+    }
+    function updateRunway() {
+      if(!data)return;
+      const month=Number($('runway-slider').value);
+      const state=runwayState(month);
+      $('runway-amount').textContent=money(state.amount);
+      $('runway-month').textContent=month===0?'per month · now':`per month · after ${plural(month,'month')}`;
+      $('runway-slider').setAttribute('aria-valuetext',`After ${plural(month,'month')}: ${money(state.amount)} per month`);
+      const marker=$('runway-marker');
+      if(marker){marker.setAttribute('cx',String(16+month/Math.max(state.maxMonth,1)*368));marker.setAttribute('cy',String(112-state.amount/Math.max(state.total,1)*92));}
+    }
+    function renderRunway() {
+      const state=runwayState(0),max=Math.max(state.maxMonth,1),total=Math.max(state.total,1);
+      const x=m=>16+m/max*368,y=v=>112-v/total*92;
+      const events=[...new Set(state.active.map(d=>d.monthsRemaining))].sort((a,b)=>a-b);
+      let path=`M16 ${y(state.total)}`;
+      for(const month of events)path+=` H${x(month)} V${y(runwayState(month).amount)}`;
+      if(!events.length)path+=' H384';
+      const area=path+' V112 H16 Z';
+      const ticks=[...new Set([0,Math.round(state.maxMonth/2),state.maxMonth])];
+      $('runway-chart').innerHTML=`<svg viewBox="0 0 400 142" role="img" aria-label="Scheduled monthly EMI begins at ${escapeHTML(money(state.total))}${state.maxMonth ? ' and reaches zero after '+state.maxMonth+' months' : '; no active loans'}."><defs><linearGradient id="runway-gradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f3ae73" stop-opacity=".20"/><stop offset="100%" stop-color="#f3ae73" stop-opacity=".01"/></linearGradient></defs><path d="M16 20H384M16 66H384M16 112H384" class="chart-grid"/><path d="${area}" fill="url(#runway-gradient)" stroke="none"/><path d="${path}" class="runway-line" pathLength="1"/><circle id="runway-marker" cx="16" cy="${y(state.total)}" r="4"/>${ticks.map((m,i)=>`<text x="${x(m)}" y="133" text-anchor="${i===0?'start':i===ticks.length-1?'end':'middle'}">${m===0?'Now':m+' mo'}</text>`).join('')}</svg>`;
+      $('runway-slider').max=state.maxMonth||1;$('runway-slider').value=0;$('runway-slider').disabled=state.maxMonth===0;
+      updateRunway();
+    }
+    $('runway-slider').addEventListener('input',updateRunway);
+    function render() {
+      const formatter = new Intl.NumberFormat(data.locale,{style:'currency',currency:data.currency,minimumFractionDigits:0,maximumFractionDigits:2});
+      money = value => formatter.format(value);
+      const date = new Date(data.month+'-01T00:00:00Z');
+      const debts=sum(data.debts,'principalRemaining'),capital=sum(data.investments,'currentCapital'),targets=sum(data.plans,'amountNeeded');
+      const active=data.debts.filter(d=>d.principalRemaining>0);
+      $('month').textContent=date.toLocaleDateString(data.locale,{month:'long',year:'numeric',timeZone:'UTC'});
+      $('updated').textContent='Updated '+new Date(data.updatedAt+'T00:00:00Z').toLocaleDateString(data.locale,{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'});
+      $('total-debt').textContent=money(debts);$('total-investment').textContent=money(capital);$('total-emi').textContent=money(sum(active,'emiAmount'));$('total-plans').textContent=money(targets);
+      $('debt-detail').textContent=plural(active.length,'active loan');$('investment-detail').textContent=plural(data.investments.length,'holding');$('plan-detail').textContent=plural(data.plans.length,'plan');
+      for(const [id,section] of [['debt','debts'],['investment','investments'],['plan','plans']])$(id+'-pill').textContent=data[section].length;
+      renderDebts();renderBalanceChart(debts,capital);
+      const investments=[...data.investments].sort((a,b)=>b.currentCapital-a.currentCapital);
+      renderAllocation(investments,capital);renderRunway();
+      $('investment-rows').innerHTML=investments.length?investments.map((i,n)=>`<article class="entry-card investment-tone reveal"><div class="entry-top"><h3>${escapeHTML(i.name)}</h3><span class="entry-symbol">${icon('chart')}</span></div><div class="amount-caption">Current capital</div><div class="entry-amount">${escapeHTML(money(i.currentCapital))}</div><div class="entry-bottom"><span>Share of investments</span><strong>${percentLabel(i.currentCapital,capital)}</strong></div><div class="mini-track" aria-hidden="true"><span style="width:${percentage(i.currentCapital,capital)}%;background:${colors[n%colors.length]}"></span></div></article>`).join(''):'<div class="empty">No investments yet. Use Edit numbers to add a holding.</div>';
+      $('investment-total').textContent=money(capital);
+      $('plan-rows').innerHTML=data.plans.length?data.plans.map((p,i)=>`<article class="entry-card plan-tone reveal"><div class="entry-top"><h3>${escapeHTML(p.name)}</h3><span class="plan-number">${String(i+1).padStart(2,'0')}</span></div><div class="amount-caption">Amount needed</div><div class="entry-amount">${escapeHTML(money(p.amountNeeded))}</div><div class="entry-bottom"><span>Share of plan budget</span><strong>${percentLabel(p.amountNeeded,targets)}</strong></div>${barMarkup(p.amountNeeded,targets)}</article>`).join(''):'<div class="empty">No plans yet. Use Edit numbers to add a target.</div>';
+      $('plan-total').textContent=money(targets);
+      $('sample').hidden=!data.isSampleData;$('welcome').hidden=true;$('dashboard').hidden=false;
+      $('download').disabled=false;$('edit').disabled=false;
+      document.title=`Personal finance · ${$('month').textContent}${data.isSampleData?' (sample)':''}`;
+      revealCards();
+    }
+
+    function applyData(raw, source) {
+      const checked = validate(raw);
+      data = checked;
+      render();
+      $('error').hidden = true;
+      $('edited').hidden = true;
+      $('source').textContent = 'Source: ' + source;
+      $('source').title = source;
+      $('status').textContent = `Loaded ${$('month').textContent}. ${data.debts.length} debts, ${data.investments.length} investments, and ${data.plans.length} plans.`;
+    }
+    function showError(message) {
+      $('error').textContent = message + (data ? ' Your previous snapshot is still displayed.' : '');
+      $('error').hidden = false;
+      if (!data) {
+        $('updated').textContent = 'Could not load the project data';
+        $('welcome-copy').textContent = 'Keep data.json next to index.html in your project. Fix the file and retry, or import a JSON file as a fallback.';
+        $('retry').hidden = false;
+        $('welcome-load').hidden = false;
+      }
+    }
+    $('retry').addEventListener('click',init);
+    $('welcome-load').addEventListener('click',()=>$('file-input').click());
+    $('file-input').addEventListener('change',async event=>{
+      const file = event.target.files[0];
+      if (!file) return;
+      const sequence = ++loadSequence;
+      try {
+        if (file.size > 2*1024*1024) throw new Error('Choose a JSON file smaller than 2 MB.');
+        const raw = JSON.parse(await file.text());
+        if (sequence === loadSequence) applyData(raw,file.name);
+      } catch(error) { if (sequence === loadSequence) showError(error instanceof SyntaxError ? 'Invalid JSON. Check for missing commas, quotation marks, or trailing commas.' : error.message); }
+      event.target.value = '';
+    });
+    $('debt-sort').addEventListener('change',renderDebts);
+    $('download').addEventListener('click',downloadData);
+    async function init() {
+      if (location.protocol==='file:') {
+        $('welcome-title').textContent='Open the dashboard with its local launcher';
+        $('welcome-copy').textContent='Your browser blocks reading data.json when this HTML is opened directly. The launcher opens the project as a local website and loads the JSON automatically. GitHub Pages loads it automatically too.';
+        $('updated').textContent='Local preview needs the launcher';
+        $('local-help').hidden=false;
+        return;
+      }
+      const sequence = ++loadSequence;
+      $('retry').disabled = true;
+      $('error').hidden = true;
+      if (!data) { $('welcome-copy').textContent='Loading data.json from the project folder…'; $('updated').textContent='Loading data.json…'; }
+      const controller = new AbortController();
+      const timeout = setTimeout(()=>controller.abort(),10000);
+      try {
+        const response = await fetch(new URL('./data.json',location.href),{cache:'no-store',signal:controller.signal});
+        if (!response.ok) throw new Error(`Could not load data.json (HTTP ${response.status}). Keep it in the same folder as index.html, then retry.`);
+        const raw = await response.json();
+        if (sequence===loadSequence) applyData(raw,'data.json');
+      } catch(error) {
+        if (sequence===loadSequence) showError(error.name==='AbortError' ? 'Loading data.json timed out. Retry when the connection is available.' : error instanceof SyntaxError ? 'data.json contains invalid JSON. Check its formatting or import another file.' : error.message);
+      } finally { clearTimeout(timeout); if (sequence===loadSequence) $('retry').disabled=false; }
+    }
+    init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "month": "2026-10",
+  "updatedAt": "2026-10-25",
+  "currency": "INR",
+  "locale": "en-IN",
+  "isSampleData": true,
+  "debts": [
+    { "lender": "Home loan", "monthsRemaining": 60, "emiAmount": 24500, "principalRemaining": 1250000 },
+    { "lender": "Car loan", "monthsRemaining": 20, "emiAmount": 15800, "principalRemaining": 285000 },
+    { "lender": "Personal loan", "monthsRemaining": 12, "emiAmount": 8000, "principalRemaining": 96000 }
+  ],
+  "investments": [
+    { "name": "Mutual funds", "currentCapital": 620000 },
+    { "name": "Provident fund", "currentCapital": 380000 },
+    { "name": "Fixed deposits", "currentCapital": 175000 }
+  ],
+  "plans": [
+    { "name": "Emergency fund", "amountNeeded": 300000 },
+    { "name": "Home renovation", "amountNeeded": 250000 },
+    { "name": "Travel fund", "amountNeeded": 150000 }
+  ]
+}
