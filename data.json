@@ -8,38 +8,44 @@
     {
       "lender": "HDFC",
       "monthsRemaining": 27,
-      "emiAmount": 64000,
-      "principalRemaining": 1511000
+      "originalAmount": 1935000,
+      "annualInterestRate": 11.25,
+      "totalTenureMonths": 36
     },
     {
       "lender": "Axis",
       "monthsRemaining": 53,
-      "emiAmount": 17000,
-      "principalRemaining": 652000
+      "originalAmount": 711000,
+      "annualInterestRate": 13.95,
+      "totalTenureMonths": 60
     },
     {
       "lender": "KreditBee",
       "monthsRemaining": 34,
-      "emiAmount": 18000,
-      "principalRemaining": 457000
+      "originalAmount": 454000,
+      "annualInterestRate": 21.11,
+      "totalTenureMonths": 36
     },
     {
       "lender": "Poonam",
       "monthsRemaining": 34,
-      "emiAmount": 17000,
-      "principalRemaining": 421000
+      "originalAmount": 435000,
+      "annualInterestRate": 23.5,
+      "totalTenureMonths": 36
     },
     {
       "lender": "Fibe",
       "monthsRemaining": 22,
-      "emiAmount": 16000,
-      "principalRemaining": 280000
+      "originalAmount": 300000,
+      "annualInterestRate": 20,
+      "totalTenureMonths": 24
     },
     {
       "lender": "Groww",
       "monthsRemaining": 22,
-      "emiAmount": 13000,
-      "principalRemaining": 235000
+      "originalAmount": 300000,
+      "annualInterestRate": 19.99,
+      "totalTenureMonths": 30
     }
   ],
   "investments": [
